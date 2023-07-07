@@ -310,6 +310,90 @@
   }
   //Function CheckCart---------------------------------------------------------------------------
 
+  // Add product to cart-------------------------------------------------------------------------
+  function addtocart(productid, category,image, name, price, rating) {
+    
+    let productOncart = JSON.parse(localStorage.getItem('itemOncart')) || {};
+
+    let pid = productid;
+    let prodcategory = category;
+    let pname = name;
+    let pimage = image;
+    let pprice = price;
+    let prating = rating;
+    let pquantity = 1;
+
+    let productItem = { productid: pid, category: prodcategory, image: pimage, name: pname,  price: pprice, rating: prating, quantity: pquantity};
+
+    if (!productOncart.items) {
+      productOncart.items = [];
+    }
+
+     // Check if a similar object already exists
+    let similarObjectIndex = productOncart.items.findIndex(item => {
+      return (
+        item.productid === pid && item.category === prodcategory
+      );
+    });
+
+    if (similarObjectIndex !== -1) {
+      // Similar object exists, update quantity
+      productOncart.items[similarObjectIndex].quantity++;
+
+      // Update the corresponding object in localStorage
+      localStorage.setItem('itemOncart', JSON.stringify(productOncart));
+    } else {
+      productOncart.items.push(productItem);
+      localStorage.setItem('itemOncart', JSON.stringify(productOncart));
+    }
+
+   checkCart()
+   
+  }
+  // Add product to cart-------------------------------------------------------------------------
+
+  //onclick heart icon---------------------------------------------------------------------------
+  function toggleFavorite(status,id) {
+    let button = document.getElementById(id);
+    let heartIcon = button.getElementsByTagName("i")[0];
+
+    if (status === "add") {
+
+      button.onclick = function () {
+        toggleFavorite('remove',this.id);
+      };// Add to favorite
+      
+      button.classList.remove("btn-light");
+      button.classList.add("btn-danger");
+
+    } else if (status === "remove") {
+
+      button.onclick = function () {
+        toggleFavorite('add',this.id);
+      };// Remove from favorite
+
+      button.classList.remove("btn-danger");
+      button.classList.add("btn-light");
+    }
+  }
+  //onclick heart icon---------------------------------------------------------------------------
+
+  //Pagination-----------------------------------------------------------------------------------
+  function togglepage(id,category) {
+
+    let selectedLink = document.getElementById(id);
+    let paginationLinks = document.getElementsByClassName("pagination-link");
+
+    for (let link of paginationLinks) {
+      link.classList.remove("active");
+    }
+
+    choose_category(category);
+
+    selectedLink.classList.add("active");
+
+  }
+  //Pagination------------------------------------------------------------------------------------
 
   //toggle product categories------------------------------------------------------------------------
   function choose_category(category) {
