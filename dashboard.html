@@ -136,5 +136,87 @@
     </div>
     <!-- content -->
   </body>
+  <script>
+
   
+  // Global variables
+  let currentPage = 1; // Current page number
+  const itemsPerPage = 6; // Number of items to display per page
+
+  //Product Object---------------------------------------------------------------------------------------------
+  let products = [
+    {
+      category: "All Products",
+      items: [
+        { productid: "1",image: "images/b5.jpg", name: "Croissants", price: 10.99, rating: 4.5 },
+        { productid: "2",image: "images/b2.jpg", name: "Sausage roll", price: 8.99, rating: 3.8 },
+        { productid: "3",image: "images/b3.jpg", name: "Viennoserie", price: 7.99, rating: 4.2 },
+        { productid: "4",image: "images/b4.jpg", name: "Banana pie", price: 9.99, rating: 4.0 },
+        { productid: "5",image: "images/b1.jpg", name: "Stromboli bread", price: 6.99, rating: 4.7 },
+        { productid: "6",image: "images/p1.jpg", name: "Vegetarian Pizza", price: 12.99, rating: 4.8 },
+        { productid: "7",image: "images/p2.jpg", name: "Behari chicken", price: 10.99, rating: 4.3 },
+        { productid: "8",image: "images/p3.jpg", name: "Hawaiian Pizza", price: 11.99, rating: 4.6 },
+        { productid: "9",image: "images/p4.jpg", name: "Afgani Tikka", price: 9.99, rating: 4.1 },
+        { productid: "10",image: "images/p5.jpg", name: "Bacon Pizza", price: 13.99, rating: 4.9 },
+        { productid: "11",image: "images/p6.jpg", name: "Chicken Supreme", price: 8.99, rating: 4.4 },
+        { productid: "12",image: "images/p7.jpg", name: "Mushrooms Pizza", price: 7.99, rating: 4.2 },
+        { productid: "13",image: "images/p8.jpg", name: "Chili pepper", price: 9.99, rating: 4.7 },
+        { productid: "14",image: "images/p9.jpg", name: "mozzarela Pizza", price: 11.99, rating: 4.5 },
+        { productid: "15",image: "images/p10.jpg", name: "Margherita Pizza", price: 10.99, rating: 4.3 },
+        { productid: "16",image: "images/d1.jpg", name: "Mojito", price: 10.99, rating: 4.5 },
+        { productid: "17",image: "images/d2.jpg", name: "Mimosa", price: 8.99, rating: 3.8 },
+        { productid: "18",image: "images/d3.jpg", name: "Long Island Ice Tea", price: 7.99, rating: 4.2 },
+        { productid: "19",image: "images/d4.jpg", name: "Strawberry Juice", price: 9.99, rating: 4.0 },
+        { productid: "20",image: "images/d5.webp", name: "Tequilla Sunrise", price: 6.99, rating: 4.7 },
+        { productid: "21",image: "images/d6.jpg", name: "Mai Tai", price: 12.99, rating: 4.8 },
+        { productid: "22",image: "images/d7.jpg", name: "Milk Tea", price: 10.99, rating: 4.3 },
+        { productid: "23",image: "images/d8.jpg", name: "Float", price: 11.99, rating: 4.6 },
+        { productid: "24",image: "images/d9.jpg", name: "Ice Tea", price: 9.99, rating: 4.1 }
+      ]
+    },
+    {
+      category: "Bread",
+      items: [
+        { productid: "1",image: "images/b5.jpg", name: "Stromboli bread", price: 10.99, rating: 4.5 },
+        { productid: "2",image: "images/b2.jpg", name: "Sausage roll", price: 8.99, rating: 3.8 },
+        { productid: "3",image: "images/b3.jpg", name: "Viennoserie", price: 7.99, rating: 4.2 },
+        { productid: "4",image: "images/b4.jpg", name: "Banana pie", price: 9.99, rating: 4.0 },
+        { productid: "5",image: "images/b1.jpg", name: "Croissants", price: 6.99, rating: 4.7 },
+      ]
+    },
+    {
+      category: "Pizza",
+      items: [
+        { productid: "1",image: "images/p1.jpg", name: "Vegetarian Pizza", price: 12.99, rating: 4.8 },
+        { productid: "2",image: "images/p2.jpg", name: "Behari chicken", price: 10.99, rating: 4.3 },
+        { productid: "3",image: "images/p3.jpg", name: "Hawaiian Pizza", price: 11.99, rating: 4.6 },
+        { productid: "4",image: "images/p4.jpg", name: "Afgani Tikka", price: 9.99, rating: 4.1 },
+        { productid: "5",image: "images/p5.jpg", name: "Bacon Pizza", price: 13.99, rating: 4.9 },
+        { productid: "6",image: "images/p6.jpg", name: "Chicken Supreme", price: 8.99, rating: 4.4 },
+        { productid: "7",image: "images/p7.jpg", name: "Mushrooms Pizza", price: 7.99, rating: 4.2 },
+        { productid: "18",image: "images/p8.jpg", name: "Chili pepper", price: 9.99, rating: 4.7 },
+        { productid: "9",image: "images/p9.jpg", name: "mozzarela Pizza", price: 11.99, rating: 4.5 },
+        { productid: "10",image: "images/p10.jpg", name: "Margherita Pizza", price: 10.99, rating: 4.3 },
+        
+      ]
+    },
+    {
+      category: "Drinks",
+      items: [
+        { productid: "1",image: "images/d1.jpg", name: "Mojito", price: 10.99, rating: 4.5 },
+        { productid: "2",image: "images/d2.jpg", name: "Mimosa", price: 8.99, rating: 3.8 },
+        { productid: "3",image: "images/d3.jpg", name: "Long Island Ice Tea", price: 7.99, rating: 4.2 },
+        { productid: "4",image: "images/d4.jpg", name: "Strawberry Juice", price: 9.99, rating: 4.0 },
+        { productid: "5",image: "images/d5.webp", name: "Tequilla Sunrise", price: 6.99, rating: 4.7 },
+        { productid: "6",image: "images/d6.jpg", name: "Mai Tai", price: 12.99, rating: 4.8 },
+        { productid: "7",image: "images/d7.jpg", name: "Milk Tea", price: 10.99, rating: 4.3 },
+        { productid: "8",image: "images/d8.jpg", name: "Float", price: 11.99, rating: 4.6 },
+        { productid: "9",image: "images/d9.jpg", name: "Ice Tea", price: 9.99, rating: 4.1 }
+      
+      ]
+    }
+  ];
+  //Product Object---------------------------------------------------------------------------------------------
+
+  </script>
 </html>
