@@ -1,0 +1,134 @@
+/* Food Application */
+/* MEAN Stack Training */
+/* Project@2023 */
+/* By: Dexter Vin */
+/* ---------------------------------------------------------- */
+
+.body-bg{
+    background-color: rgba(0, 40, 145, 0.07);
+}
+
+.inactive {
+    color:gray;
+}
+.center{
+    text-align: center;
+}
+.mt-30{
+    margin-top: 30px;
+}
+.mr-20{
+    margin-right: 20px;
+}
+.logo{
+    width:60%; border-radius: 50%;
+}
+/* product category formatting */
+/* a */
+.nav-category{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+/* div */
+.rounded-div {
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden; 
+}
+/* image */
+.rounded-div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.category_name {
+    margin-left: 10px; 
+}
+/* product category formatting */
+/* products formatting */
+.product_container{
+    background-color: rgb(233, 210, 228); 
+    margin: 10px;
+}
+.product_container_btn{
+    margin: 10px; 
+    display: flex; 
+    justify-content: space-between;
+}
+.fa-star {
+    color: yellow;
+}
+.rating_btn{
+    border-radius: 20px;
+}
+.favorite_btn{
+    border-radius: 50%; 
+    position: relative;
+}
+.product {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.product img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.product_details{
+    padding-bottom: 10px;
+}
+/* products formatting */
+
+/* Styling for pagination links */
+.pagination {
+padding: 5px 10px;
+margin: 0 5px;
+background-color: #f0cedf;
+color: #333;
+}
+
+.pagination-link {
+display: inline-block;
+padding: 5px 10px;
+margin: 0 5px;
+background-color: #eaeaea;
+color: #333;
+text-decoration: none;
+border-radius: 3px;
+}
+
+.pagination-link:hover {
+background-color: #ccc;
+}
+
+.active {
+background-color: #333;
+color: #fff;
+}
+
+.product_on_cart {
+    width: 200px; /* Adjust the width and height as per your requirements */
+    height: 100px;
+    overflow: hidden;
+  }
+  .product_on_cart img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+  }
+
+  .product_ads {
+    width: 400px; /* Adjust the width and height as per your requirements */
+    height: 160px;
+    overflow: hidden;
+    background-color: rgb(252, 252, 252);
+  }
