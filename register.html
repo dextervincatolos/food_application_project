@@ -73,4 +73,36 @@
     </section>
   </body>
 </html>
+<script>
+  
+  //saving login credentials to local storage
+  function saveCredential() {
 
+    let getusername = document.getElementById('username').value;
+    let getpassword = document.getElementById('userpassword').value;
+    let getuid = document.getElementById('uid').value;
+
+    let storedUsername = localStorage.getItem('username');
+    let storedPassword = localStorage.getItem('password');
+
+    if (getusername !== '' && getpassword !== '') {
+
+      if (getpassword !== storedPassword) {
+          
+        localStorage.setItem('uid', getuid);
+        localStorage.setItem('username', getusername);
+        localStorage.setItem('password', getpassword);
+        localStorage.setItem('authenticated', 'true');
+
+        // Redirect to another page
+        window.location.href = 'dashboard.html';
+      }else{
+        document.getElementById('validatepassword').innerHTML = 'Choose other password';
+      } 
+    }else {
+      document.getElementById('validatecred').innerHTML = ': Both Fields are Required!';
+    }
+    
+  }
+  //saving login credentials to local storage
+</script>
