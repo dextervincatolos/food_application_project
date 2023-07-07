@@ -218,5 +218,64 @@
   ];
   //Product Object---------------------------------------------------------------------------------------------
 
+  //Set product category---------------------------------------------------------------------------------------------
+  // Set product category for small and medium screens
+  let categoryList1 = document.getElementById("categoryList1");
+  let categoryList2 = document.getElementById("categoryList2");
+
+  // Get the product categories from the products object
+  let product_categories = Object.keys(products);
+
+  for (let i = 0; i < product_categories.length; i++) {
+    (function(index) {
+      let listItem1 = document.createElement("li");
+      listItem1.classList.add("nav-item");
+
+      let listItem2 = document.createElement("li");
+      listItem2.classList.add("nav-item");
+
+      let link1 = document.createElement("a");
+      link1.href = "#";
+      link1.classList.add("nav-category");
+      link1.onclick = function() {
+        choose_category(products[index].category);
+      };
+
+      let link2 = document.createElement("a");
+      link2.href = "#";
+      link2.classList.add("nav-category");
+      link2.onclick = function() {
+        choose_category(products[index].category);
+      };
+
+      let roundedDiv2 = document.createElement("div");
+      roundedDiv2.classList.add("rounded-div");
+
+      let image2 = document.createElement("img");
+      image2.src = products[index].items[0].image; 
+      image2.alt = "";
+
+      let categoryName1 = document.createElement("h6");
+      categoryName1.classList.add("category_name");
+      categoryName1.textContent = products[index].category;
+
+      let categoryName2 = document.createElement("h6");
+      categoryName2.classList.add("category_name");
+      categoryName2.textContent = products[index].category;
+
+      link1.appendChild(categoryName1);
+      listItem1.appendChild(link1);
+      categoryList1.appendChild(listItem1);
+
+      roundedDiv2.appendChild(image2);
+      link2.appendChild(roundedDiv2);
+      link2.appendChild(categoryName2);
+      listItem2.appendChild(link2);
+      categoryList2.appendChild(listItem2);
+    })(i);
+  }
+  //Set product category---------------------------------------------------------------------------------------------
+
+  
   </script>
 </html>
