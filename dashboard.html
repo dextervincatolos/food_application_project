@@ -310,5 +310,120 @@
   }
   //Function CheckCart---------------------------------------------------------------------------
 
+
+  //toggle product categories------------------------------------------------------------------------
+  function choose_category(category) {
+    
+    //display category name
+    document.getElementById('product_category_name').innerHTML = category;
+
+    // populate products with the chosen category
+    let productList = document.getElementById("productList");
+    productList.innerHTML = ""; // Clear the existing product list
+    
+
+    let selectedCategory = products.find(item => item.category === category); //find products from the objects with the chosen category
+
+    if (selectedCategory) {
+
+      let items = selectedCategory.items;
+
+      // Setup pagination variables-----------------------------------------------------------------
+      // Calculate the starting and ending index of the items to display for the current page
+      let startIndex = (currentPage - 1) * itemsPerPage;
+      let endIndex = startIndex + itemsPerPage;
+      currentPage = 1;
+      // Setup pagination variables-----------------------------------------------------------------
+
+      // Display products---------------------------------------------------------------------------
+
+      for (let i = startIndex; i < endIndex && i < items.length; i++) {
+        //Product container
+        let colDiv = document.createElement("div");
+        colDiv.classList.add("col-sm-3","product_container");
+
+        let buttonDiv = document.createElement("div");
+        buttonDiv.classList.add("product_container_btn");
+        //star rating icon
+        let starButton = document.createElement("button");
+        starButton.classList.add("btn", "btn-sm", "btn-dark", "disabled","rating_btn");
+        starButton.innerHTML = '<i class="fa fa-star"></i> ' + items[i].rating;
+        //heart icon for favorites
+        let heartButton = document.createElement("button");
+        heartButton.setAttribute("id", "favorite" + i);
+        heartButton.classList.add("btn", "btn-sm", "btn-light","favorite_btn");
+        heartButton.innerHTML = '<i class="fa fa-heart-o"></i>';
+        heartButton.onclick = function() {
+        toggleFavorite('add', this.id);
+        };
+
+        buttonDiv.appendChild(starButton);
+        buttonDiv.appendChild(heartButton);
+
+        let imgDiv = document.createElement("div");
+        imgDiv.classList.add("product");
+        //product image
+        let img = document.createElement("img");
+        img.src = items[i].image;
+        img.alt = "product_img";
+
+        imgDiv.appendChild(img);
+        //product details
+        let textDiv = document.createElement("div");
+        textDiv.classList.add("product_details");
+
+        let h5 = document.createElement("h5");
+        h5.textContent = items[i].name;
+
+        let label = document.createElement("label");
+        label.textContent = "Price: $" + items[i].price.toFixed(2);
+
+        let br = document.createElement("br");
+        //add to cart button
+        let addbutton = document.createElement("button");
+        addbutton.setAttribute("id", items[i].productid);
+        addbutton.classList.add("btn", "btn-sm", "btn-danger", "form-control", "mt-1");
+        addbutton.onclick = function() {
+          addtocart(this.id,category,items[i].image,items[i].name,items[i].price,items[i].rating);
+        };
+        addbutton.innerHTML = '<i class="fa fa-cart-plus"></i> Add to cart';
+
+        textDiv.appendChild(h5);
+        textDiv.appendChild(label);
+        textDiv.appendChild(br);
+        textDiv.appendChild(addbutton);
+
+        colDiv.appendChild(buttonDiv);
+        colDiv.appendChild(imgDiv);
+        colDiv.appendChild(textDiv);
+
+        productList.appendChild(colDiv);
+      }
+      // Create pagination links----------------------------------------------------------------
+      let totalPages = Math.ceil(items.length / itemsPerPage);
+      let paginationDiv = document.createElement("div");
+      paginationDiv.classList.add("pagination",);
+
+      for (let i = 1; i <= totalPages; i++) {
+        let pageLink = document.createElement("a");
+        pageLink.href = "#";
+        pageLink.textContent = i;
+        pageLink.classList.add("pagination-link");
+        pageLink.setAttribute("id", "pagination-link-" + i);
+        pageLink.onclick = function () {
+        currentPage = i; // Update the current page
+          togglepage("pagination-link-" + i, category);
+        };
+
+        paginationDiv.appendChild(pageLink);
+      }
+      // Create pagination links----------------------------------------------------------------
+
+      productList.appendChild(paginationDiv);
+    
+    }
+  }
+  // Display products---------------------------------------------------------------------------
+
   </script>
 </html>
