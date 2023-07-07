@@ -296,6 +296,107 @@
       }
     }
     //Display products added to cart---------------------------------------------------------------
+    // checkout function---------------------------------------------------------------------------
+    function checkout(productid,quantity,price,status) {
+
+      let h3 = document.getElementById(productid);
+
+      let amountTopay = parseFloat(document.getElementById("amountTopay").value); 
+
+      let forCheckoutTotal = 0;
+
+      if (status === "check") {
+        // if icon is checked
+        h3.onclick = function () {
+          checkout(this.id,quantity,price,'uncheck');
+        };
+        document.getElementById(productid).innerHTML = '<i class="fa fa-check-circle text-success"></i>';
+        //Add to total amount to pay
+        forCheckoutTotal = (price * quantity)+ amountTopay;
+
+        document.getElementById("amountTopay").value = forCheckoutTotal.toFixed(2);
+        document.getElementById("total").innerHTML = '$ ' +forCheckoutTotal.toFixed(2);
+
+      } else if (status === "uncheck") {
+        // if icon is unchecked
+        h3.onclick = function () {
+          checkout(this.id,quantity,price,'check');
+        };
+
+        document.getElementById(productid).innerHTML = '<i class="fa fa-circle-thin text-success"></i>';
+
+        amountTopay = parseFloat(document.getElementById("amountTopay").value); 
+        //Subtract to total amount to pay
+        let forCheckoutTotal = amountTopay - (price * quantity) ;
+
+        document.getElementById("amountTopay").value = forCheckoutTotal.toFixed(2);
+        document.getElementById("total").innerHTML = '$ '+forCheckoutTotal.toFixed(2);
+      }
+      
+    }
+    // checkout function---------------------------------------------------------------------------
+    // Add Quantity--------------------------------------------------------------------------------
+    function addProduct(id,productid,category){
+      let pid = productid;
+      let pcategory = category;
+
+      let productOncart = JSON.parse(localStorage.getItem('itemOncart'));
+
+      let productItem = { productid: pid, category: pcategory};
+
+      // Check if a similar object already exists
+      let similarObjectIndex = productOncart.items.findIndex(item => {
+        return (
+          item.productid === pid && item.category === pcategory
+        );
+      });
+
+      if (similarObjectIndex !== -1) {
+        // Similar object exists, update its properties
+        productOncart.items[similarObjectIndex].quantity++;
+        // Update the corresponding object in localStorage
+        localStorage.setItem('itemOncart', JSON.stringify(productOncart));
+
+        displayCartItems();
+      }    
+    }
+    // Add Quantity--------------------------------------------------------------------------------
+    //Remove/subtract Quantity--------------------------------------------------------------------------------
+    function removeProduct(id, productid, category) {
+
+      let pid = productid;
+      let pcategory = category;
+      let productOncart = JSON.parse(localStorage.getItem('itemOncart'));
+
+      let productItem = { productid: pid, category: pcategory };
+
+      // Check if a similar object already exists
+      let similarObjectIndex = productOncart.items.findIndex(item => {
+        return (
+          item.productid === pid && item.category === pcategory
+        );
+      });
+
+      if (similarObjectIndex !== -1) {
+        
+        productOncart.items[similarObjectIndex].quantity--;
+        // Update the corresponding object in localStorage
+        localStorage.setItem('itemOncart', JSON.stringify(productOncart));
+
+        displayCartItems();
+
+        // Remove the item if the quantity is zero
+        if (productOncart.items[similarObjectIndex].quantity === 0) {
+          productOncart.items.splice(similarObjectIndex, 1);
+          // Update the corresponding object in localStorage
+          localStorage.setItem('itemOncart', JSON.stringify(productOncart));
+
+          displayCartItems();
+        }
+        checkCart();
+      }
+    }
+    //Remove/subtract Quantity--------------------------------------------------------------------------------
 
     checkCart();
     displayCartItems();
