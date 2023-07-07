@@ -74,3 +74,49 @@
     </section>
   </body>
 </html>
+<script>
+  
+  //Validation
+  function checkCredentials() {
+
+    //Get inputs
+    let enteredUsername = document.getElementById('username').value;
+    let enteredPassword = document.getElementById('userpassword').value;
+
+    //Get saved user to local storage
+    let storedUsername = localStorage.getItem('username');
+    let storedPassword = localStorage.getItem('password');
+
+    if (enteredUsername === storedUsername && enteredPassword === storedPassword) {
+
+      localStorage.setItem('authenticated', 'true');
+      
+      window.location.href = 'dashboard.html';
+    
+    } else{
+      //Validate inputs
+      if (enteredUsername != '' && enteredUsername != storedUsername && enteredPassword === storedPassword || enteredPassword =='') {
+        document.getElementById('validatecred').innerHTML = '';
+        document.getElementById('validateusername').innerHTML = ': Incorrect username!';
+        document.getElementById('validatepassword').innerHTML = '';
+      }
+      if (enteredPassword != '' && enteredPassword != storedPassword && enteredUsername === storedUsername || enteredUsername ==='') {
+        document.getElementById('validatecred').innerHTML = '';
+        document.getElementById('validatepassword').innerHTML = ': Incorrect Password!';
+        document.getElementById('validateusername').innerHTML = '';
+      }
+      if (enteredUsername === '') {
+        document.getElementById('validateusername').innerHTML = ': Username is required!';
+      }
+      if (enteredPassword === '') {
+        document.getElementById('validatepassword').innerHTML = ': Password is required!';
+      }
+
+      if (enteredUsername != '' && enteredUsername != storedUsername && enteredPassword != '' && enteredPassword != storedPassword) {
+        document.getElementById('validatecred').innerHTML = ': User not found!';
+        document.getElementById('validateusername').innerHTML = '';
+        document.getElementById('validatepassword').innerHTML = '';
+      }
+    }
+  }
+</script>
