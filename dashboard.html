@@ -276,6 +276,39 @@
   }
   //Set product category---------------------------------------------------------------------------------------------
 
+  //display name of current logged in user---------------------------------------------------------------------------
+  let logged_in_user = localStorage.getItem('username');
+  document.getElementById("uname").innerHTML =logged_in_user;
+  //display name of current logged in user---------------------------------------------------------------------------
   
+  window.onload = function() {
+    //Set default product category---------------------------------------------------------------------------
+    // Set the default category and call the choose_category function
+    let defaultCategory = "All Products";
+    choose_category(defaultCategory);
+
+    //Check Cart on page load---------------------------------------------------------------------------
+    checkCart()
+  };
+
+  //Function CheckCart---------------------------------------------------------------------------
+  function checkCart(){
+
+    let productOncart = JSON.parse(localStorage.getItem('itemOncart'));
+    let totalQuantity = 0;
+
+    // Count products added to cart and display total to UI
+    if (productOncart !== null) {
+      productOncart.items.forEach(item => {
+        totalQuantity += item.quantity;
+      });
+      document.getElementById("countOncart").innerHTML =totalQuantity;
+    }else{
+      document.getElementById("countOncart").innerHTML ='';
+    }
+
+  }
+  //Function CheckCart---------------------------------------------------------------------------
+
   </script>
 </html>
