@@ -168,6 +168,137 @@
       </div>
       <!-- content -->
   </body>
- 
+  <script>
+  
+    //display name of current logged in user---------------------------------------------------------------------------
+    let logged_in_user = localStorage.getItem('username');
+    document.getElementById("uname").innerHTML =logged_in_user;
+    //display name of current logged in user---------------------------------------------------------------------------
+
+    //Function CheckCart---------------------------------------------------------------------------
+    function checkCart(){
+
+      let productOncart = JSON.parse(localStorage.getItem('itemOncart'));
+      let totalQuantity = 0;
+
+      // Count products added to cart and display total to UI
+      if (productOncart !== null) {
+        productOncart.items.forEach(item => {
+          totalQuantity += item.quantity;
+        });
+        document.getElementById("countOncart").innerHTML =totalQuantity;
+      }else{
+        document.getElementById("countOncart").innerHTML ='';
+      }
+  
+    }
+    //Function CheckCart---------------------------------------------------------------------------
+    //Display products added to cart---------------------------------------------------------------
+    function displayCartItems() {
+
+      let productOncart = JSON.parse(localStorage.getItem('itemOncart'));
+
+      let cartDiv = document.getElementById('cartitems');
+
+      cartDiv.innerHTML = '';
+
+      // Create elements for each item and populate the data
+      if (productOncart && productOncart.items) {
+
+        for (let item of productOncart.items) {
+
+          let { productid, category,image, name, price, rating,quantity } = item;
+
+          let row = document.createElement('div');
+          row.classList.add("col-sm-12","d-flex");
+          //check for checkout icon
+          let divcheckoutIcon = document.createElement('div');
+          divcheckoutIcon.classList.add("col-md-1", "d-flex", "align-items-center", "justify-content-center");
+          row.appendChild(divcheckoutIcon);
+          
+          let checkoutIcon = document.createElement('h3');
+          checkoutIcon.setAttribute("id", 'checkout'+category+productid);
+          checkoutIcon.innerHTML = '<i class="fa fa-circle-thin text-success"></i>';
+          checkoutIcon.onclick = function() {
+            checkout(this.id,quantity,price,'check');
+          };
+          divcheckoutIcon.appendChild(checkoutIcon);
+          //product image
+          let divImage = document.createElement('div');
+          divImage.classList.add("col-md-6" , "product_on_cart","d-flex", "align-items-center", "justify-content-center");
+          
+          let img = document.createElement('img');
+          img.src = image; // Replace 'image_url_here' with the actual image URL
+          divImage.appendChild(img);
+          row.appendChild(divImage);
+          //product details
+          let divProductInfo = document.createElement('div');
+          divProductInfo.classList.add("col-md-5");
+
+          let tblProductInfo = document.createElement('table');
+          tblProductInfo.style.margin="10px";
+
+          let trProductname = document.createElement('tr');
+
+          let thProductname = document.createElement('th');
+          thProductname.classList.add("text-success");
+          thProductname.innerHTML =  name;
+
+          trProductname.appendChild(thProductname);
+          tblProductInfo.appendChild(trProductname);
+
+          let trProductprice = document.createElement('tr');
+
+          let tdProductprice = document.createElement('td');
+          tdProductprice.innerHTML = '$'+ price;
+
+          trProductprice.appendChild(tdProductprice);
+          tblProductInfo.appendChild(trProductprice);
+
+          let trProductQuantity = document.createElement('tr');
+          let tdProductQuantity = document.createElement('td');
+          let pProductQuantity = document.createElement('p');
+
+          let iconRemoveproduct = document.createElement('i');
+          iconRemoveproduct.classList.add("fa", "fa-minus");
+          iconRemoveproduct.setAttribute("id", "minus"+category+productid);
+          iconRemoveproduct.onclick = function() {
+            removeProduct(this.id,productid,category);
+          };
+
+          let iconAddproduct = document.createElement('i');
+          iconAddproduct.classList.add("fa", "fa-plus");
+          iconAddproduct.setAttribute("id", "plus" + category+productid);
+          iconAddproduct.onclick = function() {
+            addProduct(this.id,productid,category);
+          };
+
+          let spanproductQuantity = document.createElement('span');
+          spanproductQuantity.setAttribute("id", 'quantity'+category+productid);
+          spanproductQuantity.innerHTML = quantity;
+      
+          pProductQuantity.appendChild(iconRemoveproduct);
+          pProductQuantity.appendChild(spanproductQuantity);
+          pProductQuantity.appendChild(iconAddproduct);
+
+          tdProductQuantity.appendChild(pProductQuantity);
+          trProductQuantity.appendChild(tdProductQuantity);
+          tblProductInfo.appendChild(trProductQuantity);
+
+          let hr = document.createElement('hr');          
+
+          divProductInfo.appendChild(tblProductInfo);
+          row.appendChild(divProductInfo);
+          cartDiv.appendChild(row);
+          cartDiv.appendChild(hr);
+          
+        }
+      }
+    }
+    //Display products added to cart---------------------------------------------------------------
+
+    checkCart();
+    displayCartItems();
+  </script>
 </html>
   
