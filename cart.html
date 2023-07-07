@@ -1,0 +1,173 @@
+<!-- <script>
+  function isAuthenticated() {
+    return localStorage.getItem('authenticated') === 'true';
+  }
+  if (!isAuthenticated()) {
+    // User is not authenticated, redirect to the login page
+    window.location.href = 'login.html';
+  }
+</script> -->
+  
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Snacks Point| Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/food_app.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body class="body-bg">
+    <!--Top Navigation-->
+    <div class="row" >
+      <!--Logo-->
+      <div class="col-sm-2 mt-2 center d-none d-sm-block">
+          <img src="images/logo2.jpg" alt="Snack Point" class="logo" >
+      </div>
+      <!--Logo-->
+      <div class="col-sm-7 col-10 mt-5">
+        <!--Navbar small screen-->
+        <button type="button" class="btn btn-md btn-outline-danger dropdown-toggle d-inline d-sm-none" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <ul class="dropdown-menu form-control d-sm-none">
+          <li><a class="dropdown-item inactive" href="dashboard.html"><i class="fa fa-angle-right" aria-hidden="true"></i> Dashboard</a></li>
+          <li><a class="dropdown-item inactive" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Your Orders</a></li>
+          <li><a class="dropdown-item inactive" href="wishlist.html"><i class="fa fa-angle-right" aria-hidden="true"></i> Wishlist</a></li>
+          <li><a class="dropdown-item inactive" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Services</a></li>
+          <li><a class="dropdown-item inactive" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Checkout</a></li>
+          <li><a class="dropdown-item inactive" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> About</a></li>
+          <li><a class="dropdown-item inactive" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Contact</a></li>
+        </ul>
+        <!--Navbar small screen-->
+      
+        <button class="btn btn-outline-danger btn-md d-none d-sm-inline"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+        <button class="btn btn-outline-danger btn-md d-none d-sm-inline"><i class="fa fa-tag" aria-hidden="true"></i> Offers</button>
+        <a href="#" type="button" class="btn btn-outline-danger btn-md position-relative">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
+            <span id="countOncart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span>
+        </a>
+      </div>
+      <div class="col-sm-3 col-2 mt-5">
+        <div class="btn-group">
+          <!--Visible on medium screen-->
+          <button type="button" class="btn btn-md btn-outline-danger dropdown-toggle d-none d-sm-inline" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <span id="uname" class="d-none d-sm-inline">Dexter Vin Catolos</span>
+          </button>
+          <!--Visible on medium screen-->
+          <!--Visible on small screen-->
+          <button type="button" class="btn btn-md btn-outline-danger dropdown-toggle d-inline d-sm-none" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-user" aria-hidden="true"></i>
+          </button>
+          <!--Visible on small screen-->
+          <ul class="dropdown-menu form-control">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="logout.html">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+      <!--Search bar on small screen--> 
+      <div  class=" m-2 col-12  d-block d-sm-none">
+        <input class="form-control" type="text" placeholder="Search">
+      </div>
+        <!--Search bar on small screen--> 
+      </div>
+      <!--Top Navigation--> 
+      <!-- content -->
+      <div class="container-fluid">
+        <div class="row">
+          <!-- Navbar Hidden on small screen-->
+          <div class="col-md-2 d-none d-sm-block" >
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                  <a class="nav-link inactive" href="dashboard.html" ><p> <i class="fa fa-angle-right" aria-hidden="true"></i> Dashbord</p></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link inactive" href="#"><p> <i class="fa fa-angle-right" aria-hidden="true"></i> Your Orders</p></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link inactive" href="wishlist.html">
+                    <p> 
+                      <i class="fa fa-angle-right" aria-hidden="true"></i> 
+                      Wishlist
+                      <span class="badge bg-danger" style="font-size: 11px;">3</span>
+                    </p>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link inactive" href="#"><p> <i class="fa fa-angle-right" aria-hidden="true"></i> Services</p></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link inactive" href="#"><p> <i class="fa fa-angle-right" aria-hidden="true"></i> Checkout</p></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link inactive" href="#"><p> <i class="fa fa-angle-right" aria-hidden="true"></i> About</p></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link inactive" href="#"><p> <i class="fa fa-angle-right" aria-hidden="true"></i> Contact</p></a>
+              </li>
+            </ul>
+          </div>
+          <!-- Navbar Hidden on small screen-->
+          <!-- Product list -->
+          <div class="row col-sm-7 overflow-auto"   style="background-color: aliceblue; text-align: center; padding:50px;">
+            <div class="col-md-12"> <h3>Items on Cart</h3></div>
+            <div id="cartitems" class="row d-flex"> 
+              <!-- Products on cart will be dynamically displayed here -->
+            </div>
+            <!-- Product Checkout-->
+            <div style="text-align: right;">
+              <h3 id="total" class="text-danger">$ 00.00</h3>
+              <input type="hidden" id="amountTopay" readonly value="0">
+              <button id="checkoutSelectedItem" class="btn btn-md btn-danger form-control disabled" onclick="checkoutSelectedItem()" ><i class="fa fa-money" aria-hidden="true"></i> Checkout</button>
+            </div>
+            <!-- Product Checkout-->     
+          </div>    
+          <!-- Product list -->
+          <!-- Related Products -->
+          <div class="col-sm-3 d-none d-sm-block"  style="padding-left: 50px;">
+            <h5>Related products</h5>
+            <div class="col-12 product_ads d-flex align-items-center justify-content-center">
+              <img src="images/pizza-commercial.gif" alt="">
+            </div>        
+              <ul id="categoryList" class="nav flex-column">
+                <li class="nav-item">
+                    <a href="#" class="nav-category">
+                      <div class="col-md-6 product_on_cart d-flex align-items-center justify-content-center">
+                        <img src="images/b1.jpg">
+                      </div>
+                      <h6 class="category_name">Stromboli bread</h6>
+                    </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-category">
+                    <div class="col-md-6 product_on_cart d-flex align-items-center justify-content-center">
+                      <img src="images/p1.jpg">
+                    </div>
+                    <h6 class="category_name">Vegetarian Pizza</h6>
+                  </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-category">
+                  <div class="col-md-6 product_on_cart d-flex align-items-center justify-content-center">
+                    <img src="images/d9.jpg">
+                  </div>
+                  <h6 class="category_name">Ice Tea</h6>
+                </a>
+            </li>
+            
+                
+              </ul>
+          </div>
+          <!-- Related Products -->
+        </div>
+      </div>
+      <!-- content -->
+  </body>
+ 
+</html>
+  
